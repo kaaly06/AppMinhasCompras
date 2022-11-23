@@ -30,7 +30,7 @@ namespace AppCompras
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new View.Listagem());
         }
 
         protected override void OnStart()

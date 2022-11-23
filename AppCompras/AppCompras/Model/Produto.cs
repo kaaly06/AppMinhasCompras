@@ -7,6 +7,7 @@ namespace AppCompras.Model
 {
     public class Produto
     {
+        [PrimaryKey, AutoIncrement]
         public int id { get; set; }         
 
         public string descricao { get; set; }

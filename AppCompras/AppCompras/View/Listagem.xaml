@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppCompras.View.Listagem"
+             Title="Lista de Compras">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Somar" Clicked="TBI_Clicked_Somar" />
+        <ToolbarItem Text="Novo" Clicked="TBI_Clicked_Novo" />
+    </ContentPage.ToolbarItems>
+
+
+    <ContentPage.Content>
+        <Frame>
+            <StackLayout>
+
+                <SearchBar x:Name="txt_busca" 
+                       Placeholder="digite o produto"
+                       CancelButtonColor="#8f7193"
+                       PlaceholderColor="#b5b5b5"
+                       TextColor="#b5b5b5"
+                       HorizontalTextAlignment="Center"
+                       FontSize="Medium"
+                       FontAttributes="Italic"
+                       TextChanged="txt_busca_TextChanged"
+                       />
+
+                <RefreshView x:Name="ref_carregando" IsRefreshing="true">
+                    <ListView x:Name="lst_produtos" ItemSelected="lst_produtos_ItemSelected">
+                        <ListView.Header>
+                            <!--altura da linha automática-->
+                            <Grid RowDefinitions="Auto" 
+                              ColumnDefinitions="*, Auto, Auto">
+                                <!--cabeçalho da listView-->
+                                <Label Grid.Row="0" Grid.Column="0" Text="Descrição"
+                                      TextColor=" #8f7193" Padding="10" />
+
+                                <Label Grid.Row="0" Grid.Column="1" Text="Quantidade"
+                                    TextColor=" #8f7193" Padding="10"
+                                   />
+
+                                <Label Grid.Row="0" Grid.Column="2" Text="Preço"
+                                    TextColor=" #8f7193" Padding="10"
+                                   />
+                            </Grid>
+                        </ListView.Header>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ViewCell.ContextActions>
+                                        <MenuItem Text="Remover" Clicked="MenuItem_Clicked"/>
+                                    </ViewCell.ContextActions>
+
+                                    <Grid RowDefinitions="Auto" Padding="10"
+                                   ColumnDefinitions="Auto, *, Auto, Auto">
+                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding id}"
+                                           TextColor="#dac9df" FontSize="Small"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding descricao}"/>
+                                        <Label Grid.Row="0" Grid.Column="2" Text="{Binding quantidade} "/>
+                                        <Label Grid.Row="0" Grid.Column="3" Text="{Binding preco}"
+                                           Padding="0, 20, 0, 0"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </RefreshView>
+
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+   
+</ContentPage>

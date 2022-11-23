@@ -21,27 +21,34 @@ namespace AppCompras.Helper
             return _connection.InsertAsync(p);
         }
 
-        public void Update(Produto p)
+        public Task<List<Produto>> Update(Produto p)
         {
-            string sql = "UPTADE produto SET descricao=?, Quantidade=?, Preco=? WHERE id= ? ";
-            _connection.QueryAsync<Produto>(sql, p.descricao, p.quantidade, p.preco, p.id);
+            string sql = "UPTADE Produto SET descricao=?, quantidade=?, preco=? WHERE id= ?";
+            return _connection.QueryAsync<Produto>(sql, p.descricao, p.quantidade, p.preco, p.id);
         }
 
-         /** public Task<Produto> getByid(int id)
-        {
-            return new Produto();
-        }
-         */
+        /** public Task<Produto> getByid(int id)
+       {
+           return new Produto();
+       }
+        */
 
-       public Task<List<Produto>> GetAll()
+        public Task<List<Produto>> GetAll()
         {
             return _connection.Table<Produto>().ToListAsync();
         }
-        
+
 
         public Task<int> Delete(int id)
         {
             return _connection.Table<Produto>().DeleteAsync(i => i.id == id);
+        }
+
+        public Task<List<Produto>> Search(string q)
+        {
+            string sql = "SELECT * FROM Produto WHERE descricao LIKE '%" + q + "%' ";
+
+            return _connection.QueryAsync<Produto>(sql);
         }
     }
 }
